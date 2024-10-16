@@ -1,80 +1,30 @@
-/**
- * My To Do List App
- *
- * @format
- */
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native';
+import ToDoList from './ToDoList';
+import ToDoForm from './ToDoForm';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Button
-} from 'react-native';
+function Index() {
+  const [tasks, setTasks] = useState([
+    { id: 1, text: 'Do laundry', completed: true },
+    { id: 2, text: 'Go to gym', completed: false },
+    { id: 3, text: 'Walk dog', completed: true },
+  ]);
 
+  const addTask = (taskText) => {
+    const newTask = {
+      id: tasks.length + 1,
+      text: taskText,
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
+  };
 
-function App() {
   return (
     <SafeAreaView>
-      <ScrollView>
-        <Pressable>
-          <View style={[styles.task, styles.completed]}>
-            <Text style={styles.taskText}>Do laundry</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View style={[styles.task]}>
-            <Text style={styles.taskText}>Go to gym</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View style={[styles.task, styles.completed]}>
-            <Text style={styles.taskText}>Walk dog</Text>
-          </View>
-        </Pressable>
-      </ScrollView>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Add a new task..."
-        />
-        <Button title="Add" />
-      </View>
+      <ToDoList tasks={tasks} />
+      <ToDoForm addTask={addTask} />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  task: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-  },
-  completed: {
-    backgroundColor: '#e0e0e0',
-  },
-  taskText: {
-    fontSize: 16,
-  },
-  form: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginRight: 10,
-  },
-});
-
-export default App;
+export default Index;
