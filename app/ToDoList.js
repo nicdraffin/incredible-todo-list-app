@@ -1,12 +1,13 @@
 import React from 'react';
 import { ScrollView, Pressable, View, Text, StyleSheet } from 'react-native';
 
-function ToDoList({ tasks, toggleTaskCompletion }) {
+
+function ToDoList({ tasks, onToggleTask }) {
   return (
     <ScrollView>
       {tasks.map((task) => (
-        <Pressable key={task.id} onPress={() => toggleTaskCompletion(task.id)}>
-          <View style={[styles.task, task.completed ? styles.completed : null]}>
+        <Pressable key={task.id} onPress={() => onToggleTask(task.id)}>
+          <View style={[styles.task]}>
             <Text style={styles.taskText}>
               {task.text}
             </Text>

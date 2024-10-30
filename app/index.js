@@ -5,10 +5,14 @@ import ToDoForm from './ToDoForm';
 
 function Index() {
   const [tasks, setTasks] = useState([
-    { id: 1, text: 'Do laundry', completed: true },
+    { id: 1, text: 'Do laundry', completed: false },
     { id: 2, text: 'Go to gym', completed: false },
-    { id: 3, text: 'Walk dog', completed: true },
+    { id: 3, text: 'Walk dog', completed: false },
   ]);
+
+  const toggleTaskCompletion = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
 
   const addTask = (taskText) => {
     const newTask = {
@@ -21,7 +25,7 @@ function Index() {
 
   return (
     <SafeAreaView>
-      <ToDoList tasks={tasks} />
+      <ToDoList tasks={tasks} onToggleTask={toggleTaskCompletion} />
       <ToDoForm addTask={addTask} />
     </SafeAreaView>
   );
